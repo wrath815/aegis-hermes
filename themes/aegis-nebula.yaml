@@ -1,0 +1,44 @@
+# AEGIS Nebula — AEGIS theme pack for the Hermes dashboard.
+# Drop into <Hermes home>/dashboard-themes/ and pick it in the theme switcher.
+name: aegis-nebula
+label: AEGIS Nebula
+description: Deep violet with cyan signals — the mission-control lane.
+palette:
+  background:
+    hex: '#0d0b1a'
+    alpha: 1
+  midground:
+    hex: '#e9e6fb'
+    alpha: 1
+  foreground:
+    hex: '#ffffff'
+    alpha: 0
+  warmGlow: rgba(139, 123, 240, 0.3)
+  noiseOpacity: 0
+typography:
+  fontSans: '"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif'
+  fontMono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  baseSize: 15px
+  lineHeight: '1.6'
+  letterSpacing: '0'
+layout:
+  radius: 0.75rem
+  density: comfortable
+colorOverrides:
+  card: '#171334'
+  cardForeground: '#e9e6fb'
+  popover: '#171334'
+  popoverForeground: '#e9e6fb'
+  primary: '#8b7bf0'
+  primaryForeground: '#14112b'
+  secondary: '#211b47'
+  secondaryForeground: '#e9e6fb'
+  muted: '#211b47'
+  mutedForeground: '#a9a3d0'
+  accent: '#211b47'
+  accentForeground: '#e9e6fb'
+  destructive: '#f0a4c4'
+  success: '#7fd6c0'
+  border: '#332c5e'
+  input: '#332c5e'
+  ring: '#8b7bf0'

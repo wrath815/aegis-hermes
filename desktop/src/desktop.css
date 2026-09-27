@@ -1,0 +1,29 @@
+/* Hermes Desktop overrides for the shared AEGIS styles (dashboard/src/style.css).
+   The desktop paints its own --ui-* tokens from the active theme, so the local
+   --a-* aliases are re-pointed at them; everything else is shared. */
+
+.aegis-mission, .aegis-boot, .aegis-hud {
+  --a-bg: var(--ui-bg-editor, var(--color-background));
+  --a-panel: var(--ui-bg-elevated, var(--color-card));
+  --a-panel-soft: var(--ui-bg-secondary, var(--color-card));
+  --a-ink: var(--ui-text-primary, var(--color-foreground));
+  --a-muted: var(--ui-text-tertiary, var(--color-foreground));
+  --a-accent: var(--ui-accent, var(--theme-midground));
+  --a-on-accent: var(--color-primary-foreground, #fff);
+  --a-line: var(--ui-stroke-secondary, var(--color-border));
+  --a-good: #4fbf85;
+  --a-bad: var(--color-destructive, #e5484d);
+  --a-signal: var(--ui-accent, var(--theme-midground));
+  --a-radius: 0.75rem;
+}
+
+/* A route fills the workspace pane; the room takes the height left under the title. */
+.aegis-desktop-page {
+  display: flex; flex-direction: column; gap: 0.75rem;
+  height: 100%; min-height: 0; padding: 1.25rem 1.5rem 1.5rem; box-sizing: border-box;
+}
+.aegis-page-title { margin: 0; font-size: 1.5rem; font-weight: 600; color: var(--ui-text-primary); }
+.aegis-desktop-page .aegis-mission { flex: 1; height: auto; min-height: 24rem; }
+
+/* The overlay mounts inside the title-bar cluster; keep it out of that layout. */
+.aegis-boot, .aegis-hud { -webkit-app-region: no-drag; }

@@ -1,0 +1,44 @@
+# AEGIS Porcelain — AEGIS theme pack for the Hermes dashboard.
+# Drop into <Hermes home>/dashboard-themes/ and pick it in the theme switcher.
+name: aegis-porcelain
+label: AEGIS Porcelain
+description: Warm paper, clear type and deep forest green.
+palette:
+  background:
+    hex: '#f4f3ef'
+    alpha: 1
+  midground:
+    hex: '#25352e'
+    alpha: 1
+  foreground:
+    hex: '#ffffff'
+    alpha: 0
+  warmGlow: rgba(40, 100, 83, 0.3)
+  noiseOpacity: 0
+typography:
+  fontSans: '"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif'
+  fontMono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  baseSize: 15px
+  lineHeight: '1.6'
+  letterSpacing: '0'
+layout:
+  radius: 0.75rem
+  density: comfortable
+colorOverrides:
+  card: '#ffffff'
+  cardForeground: '#25352e'
+  popover: '#ffffff'
+  popoverForeground: '#25352e'
+  primary: '#286453'
+  primaryForeground: '#ffffff'
+  secondary: '#e9eee9'
+  secondaryForeground: '#25352e'
+  muted: '#e9eee9'
+  mutedForeground: '#637269'
+  accent: '#e9eee9'
+  accentForeground: '#25352e'
+  destructive: '#b13c36'
+  success: '#2e7157'
+  border: '#cbd5cb'
+  input: '#cbd5cb'
+  ring: '#286453'

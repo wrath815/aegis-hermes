@@ -1,0 +1,47 @@
+# AEGIS Sandstone — AEGIS theme pack for the Hermes dashboard.
+# Drop into <Hermes home>/dashboard-themes/ and pick it in the theme switcher.
+name: aegis-sandstone
+label: AEGIS Sandstone
+description: Warm paper and terracotta, set in a refined serif.
+palette:
+  background:
+    hex: '#f6f1e7'
+    alpha: 1
+  midground:
+    hex: '#3a2c1d'
+    alpha: 1
+  foreground:
+    hex: '#ffffff'
+    alpha: 0
+  warmGlow: rgba(168, 100, 42, 0.3)
+  noiseOpacity: 0
+typography:
+  fontSans: '"Segoe UI Variable", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif'
+  fontMono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  baseSize: 15px
+  lineHeight: '1.6'
+  letterSpacing: '0'
+  fontDisplay: '"Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif'
+  fontUrl: https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap
+layout:
+  radius: 0.75rem
+  density: comfortable
+colorOverrides:
+  card: '#fffdf8'
+  cardForeground: '#3a2c1d'
+  popover: '#fffdf8'
+  popoverForeground: '#3a2c1d'
+  primary: '#a8642a'
+  primaryForeground: '#ffffff'
+  secondary: '#efe7d6'
+  secondaryForeground: '#3a2c1d'
+  muted: '#efe7d6'
+  mutedForeground: '#7c6a54'
+  accent: '#efe7d6'
+  accentForeground: '#3a2c1d'
+  destructive: '#b1503a'
+  success: '#5c7a4a'
+  border: '#d8ccb4'
+  input: '#d8ccb4'
+  ring: '#a8642a'
+customCSS: 'h1, h2, h3 { font-family: var(--theme-font-display); letter-spacing: -0.02em; }'

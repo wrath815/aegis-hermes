@@ -1,0 +1,27 @@
+/* Self-hosted faces for the AEGIS Regalia theme, so it renders the same offline.
+   All SIL Open Font License 1.1 and unmodified; licences sit beside the files
+   in ./fonts. Browsers only download a face once a theme actually uses it. */
+
+@font-face {
+  font-family: "Great Vibes";
+  src: url("./GreatVibes-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IM Fell English";
+  src: url("./IMFeENrm28P.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IM Fell English";
+  src: url("./IMFeENit28P.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

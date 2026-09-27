@@ -1,0 +1,46 @@
+# AEGIS Amber — AEGIS theme pack for the Hermes dashboard.
+# Drop into <Hermes home>/dashboard-themes/ and pick it in the theme switcher.
+name: aegis-amber
+label: AEGIS Amber
+description: The original mission-control look — amber on black, with the HUD.
+palette:
+  background:
+    hex: '#080907'
+    alpha: 1
+  midground:
+    hex: '#e9e3d4'
+    alpha: 1
+  foreground:
+    hex: '#ffffff'
+    alpha: 0
+  warmGlow: rgba(255, 194, 51, 0.3)
+  noiseOpacity: 0
+typography:
+  fontSans: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  fontMono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  baseSize: 15px
+  lineHeight: '1.6'
+  letterSpacing: 0.01em
+layout:
+  radius: 0.125rem
+  density: comfortable
+colorOverrides:
+  card: '#10110c'
+  cardForeground: '#e9e3d4'
+  popover: '#10110c'
+  popoverForeground: '#e9e3d4'
+  primary: '#ffc233'
+  primaryForeground: '#171b16'
+  secondary: '#16170f'
+  secondaryForeground: '#e9e3d4'
+  muted: '#16170f'
+  mutedForeground: '#a39c89'
+  accent: '#16170f'
+  accentForeground: '#e9e3d4'
+  destructive: '#ff7a6b'
+  success: '#9fd69a'
+  border: '#3a3522'
+  input: '#3a3522'
+  ring: '#ffc233'
+customCSS: ".aegis-hud { display: block !important; }\n      h1, h2, h3 { letter-spacing: 0.04em; text-transform:\
+  \ uppercase; }"

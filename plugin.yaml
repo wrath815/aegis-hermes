@@ -1,0 +1,5 @@
+name: aegis
+version: 0.1.0
+description: "AEGIS for Hermes: Mission Control visualizer (live orb, agents, tasks, activity, telemetry), seven themes and a boot screen, for the desktop app and the dashboard. Registers no tools, hooks or middleware."
+author: "WRATH815"
+requires_hermes: ">=0.21"

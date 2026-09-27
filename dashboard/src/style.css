@@ -1,0 +1,250 @@
+/* AEGIS dashboard plugin. Every colour comes from the host theme's tokens, so
+   Mission Control, the boot plate and the HUD follow whichever theme is active
+   (the AEGIS pack or any Hermes preset). Local aliases keep the rules readable. */
+
+.aegis-mission, .aegis-boot, .aegis-hud {
+  --a-bg: var(--background-base, #0b0d0c);
+  --a-panel: var(--color-card, #151816);
+  --a-panel-soft: var(--color-muted, #1e2320);
+  --a-ink: var(--color-card-foreground, var(--midground-base, #e8efeb));
+  --a-muted: var(--color-muted-foreground, #9aa59f);
+  --a-accent: var(--color-primary, #ffc233);
+  --a-on-accent: var(--color-primary-foreground, #111);
+  --a-line: var(--color-border, #2d3531);
+  --a-good: var(--color-success, #7fd6a0);
+  --a-bad: var(--color-destructive, #f0908a);
+  --a-signal: var(--color-ring, var(--a-accent));
+  --a-radius: var(--radius, 0.75rem);
+}
+
+.aegis-icon { width: 1rem; height: 1rem; flex: none; }
+
+/* ── Mission Control room ─────────────────────────────────────────────── */
+.aegis-mission {
+  display: flex; flex-direction: column;
+  height: calc(100dvh - 9rem); min-height: 34rem;
+  border: 1px solid var(--a-line); border-radius: var(--a-radius); overflow: hidden;
+  color: var(--a-ink);
+  background:
+    radial-gradient(120% 120% at 50% 30%, color-mix(in oklab, var(--a-panel) 45%, transparent), transparent 70%),
+    var(--a-bg);
+}
+.aegis-mission-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .6rem .8rem; border-bottom: 1px solid var(--a-line);
+}
+.aegis-mission-tabs { display: flex; gap: .25rem; flex-wrap: wrap; }
+.aegis-mission-tab {
+  display: inline-flex; align-items: center; gap: .4rem; padding: .45rem .8rem;
+  border-radius: calc(var(--a-radius) * .75); border: 1px solid transparent; background: transparent;
+  color: var(--a-muted); font: inherit; font-size: .8rem; cursor: pointer; transition: color .15s, background .15s;
+}
+.aegis-mission-tab:hover { color: var(--a-ink); }
+.aegis-mission-tab.on { background: var(--a-panel); border-color: var(--a-line); color: var(--a-ink); }
+.aegis-mission-tab:focus-visible, .aegis-gear:focus-visible { outline: 2px solid var(--a-accent); outline-offset: 2px; }
+.aegis-mission-status {
+  display: flex; align-items: center; gap: .5rem; min-width: 0; max-width: 45%;
+  font-size: .74rem; color: var(--a-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.aegis-dot { width: .55rem; height: .55rem; border-radius: 50%; flex: none; background: var(--a-muted); }
+.aegis-dot.ok { background: var(--a-good); box-shadow: 0 0 8px var(--a-good); }
+.aegis-dot.off { background: var(--a-bad); }
+
+.aegis-mission-body { position: relative; flex: 1; min-height: 0; }
+.aegis-mission-stage { position: absolute; inset: 0; }
+.aegis-scroll { position: absolute; inset: 0; overflow: auto; padding: 1rem; }
+.aegis-empty { color: var(--a-muted); text-align: center; padding: 2rem; font-size: .85rem; }
+.aegis-empty.small { padding: .8rem; font-size: .75rem; }
+
+/* Overview */
+.aegis-orb {
+  position: absolute; inset: 0; overflow: hidden;
+  background: radial-gradient(circle at 50% 46%, color-mix(in oklab, var(--a-signal) 18%, transparent), transparent 32%), var(--a-bg);
+}
+.aegis-orb-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.aegis-readout, .aegis-gear, .aegis-panel {
+  background: color-mix(in oklab, var(--a-panel) 84%, transparent);
+  border: 1px solid var(--a-line); backdrop-filter: blur(6px);
+}
+.aegis-readout { position: absolute; top: 1rem; left: 1rem; padding: .6rem .85rem; border-radius: var(--a-radius); }
+.aegis-readout strong { display: block; font-size: .9rem; }
+.aegis-readout small { display: block; margin-top: .15rem; font-size: .7rem; color: var(--a-muted); }
+.aegis-offline {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .4rem;
+  text-align: center; color: var(--a-muted); pointer-events: none;
+}
+.aegis-offline .aegis-icon { width: 2.2rem; height: 2.2rem; opacity: .7; }
+.aegis-offline p { margin: 0; color: var(--a-ink); font-weight: 600; }
+.aegis-offline span { font-size: .78rem; }
+.aegis-stage-tools { position: absolute; top: 1rem; right: 1rem; display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; }
+.aegis-gear {
+  display: grid; place-content: center; width: 2.3rem; height: 2.3rem; border-radius: calc(var(--a-radius) * .8);
+  color: var(--a-ink); cursor: pointer; transition: border-color .18s, transform .18s;
+}
+.aegis-gear:hover { border-color: var(--a-accent); transform: translateY(-1px); }
+.aegis-panel { padding: .8rem .9rem; min-width: 14rem; border-radius: var(--a-radius); box-shadow: 0 12px 40px #0006; }
+.aegis-panel-title { margin: 0 0 .5rem; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--a-muted); }
+.aegis-toggle { display: flex; align-items: center; gap: .55rem; padding: .3rem 0; font-size: .82rem; cursor: pointer; }
+.aegis-toggle input { accent-color: var(--a-accent); width: 1rem; height: 1rem; }
+
+/* Agents */
+.aegis-agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .8rem; }
+.aegis-agent { background: var(--a-panel); border: 1px solid var(--a-line); border-radius: var(--a-radius); padding: .9rem; }
+.aegis-agent-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+.aegis-state { font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .5rem; border-radius: 999px; }
+.aegis-state.working { background: color-mix(in oklab, var(--a-good) 22%, transparent); color: var(--a-good); }
+.aegis-state.idle { background: var(--a-panel-soft); color: var(--a-muted); }
+.aegis-chip { font-size: .6rem; color: var(--a-accent); border: 1px solid color-mix(in oklab, var(--a-accent) 45%, transparent); border-radius: 6px; padding: .1rem .4rem; }
+.aegis-agent-name { display: block; font-size: .95rem; }
+.aegis-agent-desc {
+  margin: .35rem 0 .6rem; color: var(--a-muted); font-size: .78rem; line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.aegis-agent-meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .72rem; color: var(--a-muted); }
+.aegis-agent-meta span { display: inline-flex; align-items: center; gap: .3rem; min-width: 0; }
+.aegis-agent-meta .aegis-icon { width: .85rem; height: .85rem; }
+
+/* Tasks */
+.aegis-kanban { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; min-height: 100%; }
+.aegis-kanban-col { display: flex; flex-direction: column; min-height: 0; }
+.aegis-kanban-head { display: flex; align-items: center; gap: .5rem; padding: .4rem .2rem; font-size: .74rem; }
+.aegis-kanban-head em { margin-left: auto; color: var(--a-muted); font-style: normal; font-size: .7rem; }
+.aegis-lane { width: .55rem; height: .55rem; border-radius: 3px; background: var(--a-muted); }
+.aegis-lane.running { background: var(--a-accent); }
+.aegis-lane.done { background: var(--a-good); }
+.aegis-kanban-cards { display: flex; flex-direction: column; gap: .5rem; padding: .2rem; }
+.aegis-task {
+  background: var(--a-panel); border: 1px solid var(--a-line); border-left: 3px solid color-mix(in oklab, var(--a-accent) 55%, transparent);
+  border-radius: calc(var(--a-radius) * .75); padding: .6rem .7rem;
+}
+.aegis-task.failed { border-left-color: var(--a-bad); }
+.aegis-task-title { margin: 0 0 .4rem; font-size: .8rem; line-height: 1.45; }
+.aegis-task-meta { display: flex; justify-content: space-between; gap: .5rem; font-size: .68rem; color: var(--a-muted); }
+
+/* Activity */
+.aegis-feed { list-style: none; margin: 0; padding: 0; }
+.aegis-feed-row {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: .7rem; align-items: center;
+  padding: .55rem .3rem; border-bottom: 1px solid var(--a-line); font-size: .78rem;
+}
+.aegis-feed-kind {
+  font-size: .6rem; text-transform: uppercase; letter-spacing: .05em; padding: .15rem .4rem; border-radius: 5px;
+  background: var(--a-panel-soft); color: var(--a-muted);
+}
+.aegis-feed-kind.live { color: var(--a-good); }
+.aegis-feed-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.aegis-feed-meta { color: var(--a-muted); font-size: .7rem; white-space: nowrap; }
+.aegis-feed-row time { color: var(--a-muted); font-variant-numeric: tabular-nums; font-size: .7rem; }
+
+/* Resource strip */
+.aegis-strip { display: flex; flex-wrap: wrap; gap: .5rem; padding: .6rem .8rem; border-top: 1px solid var(--a-line); background: var(--a-bg); }
+.aegis-tile { flex: 1 1 7rem; min-width: 7rem; background: var(--a-panel); border: 1px solid var(--a-line); border-radius: calc(var(--a-radius) * .75); padding: .4rem .7rem; }
+.aegis-tile small { display: block; font-size: .58rem; letter-spacing: .06em; text-transform: uppercase; color: var(--a-muted); }
+.aegis-tile strong { display: block; font-size: .8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 720px) {
+  .aegis-kanban { grid-template-columns: 1fr; }
+  .aegis-mission-status { display: none; }
+  .aegis-feed-meta { display: none; }
+  .aegis-feed-row { grid-template-columns: auto minmax(0, 1fr) auto; }
+}
+
+/* ── HUD overlay (revealed only by the AEGIS Amber theme's customCSS) ─── */
+.aegis-hud { display: none; position: fixed; inset: 0; z-index: 40; pointer-events: none; overflow: hidden; }
+.aegis-hud * { pointer-events: none; }
+.aegis-hud-grid {
+  position: absolute; inset: -12rem; will-change: transform;
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--a-accent) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--a-accent) 6%, transparent) 1px, transparent 1px);
+  background-size: 176px 176px;
+}
+.aegis-hud-scan {
+  position: absolute; inset: 0; opacity: .75; mix-blend-mode: plus-lighter;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .028) 0 1px, transparent 1px 3px);
+}
+.aegis-hud-sweep {
+  position: absolute; inset-inline: 0; height: 45vh;
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--a-accent) 5%, transparent), transparent);
+  animation: aegis-hud-sweep 9s linear infinite;
+}
+@keyframes aegis-hud-sweep { from { transform: translateY(-60vh); } to { transform: translateY(160vh); } }
+.aegis-hud-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .6) 100%); }
+.aegis-hud-tick { position: absolute; width: 18px; height: 18px; border: 1px solid color-mix(in oklab, var(--a-accent) 40%, transparent); }
+.aegis-hud-tick.tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.aegis-hud-tick.tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+.aegis-hud-tick.bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+.aegis-hud-tick.br { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+
+/* ── Boot plate ───────────────────────────────────────────────────────── */
+.aegis-boot {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; cursor: pointer;
+  background: radial-gradient(ellipse at center, color-mix(in oklab, var(--a-bg) 80%, #000), #000 75%);
+  transition: opacity .42s ease, transform .42s ease;
+}
+.aegis-boot.leaving { opacity: 0; transform: scale(1.04); pointer-events: none; }
+.aegis-boot-bg {
+  position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: blur(3.5px) brightness(.9); animation: aegis-bg-drift 16s ease-out both;
+}
+@keyframes aegis-bg-drift { from { transform: scale(1.16); } to { transform: scale(1.06); } }
+.aegis-boot-veil {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(circle at center, rgba(0, 0, 0, .92) 0%, rgba(0, 0, 0, .74) 34%, transparent 66%),
+    radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, .78) 100%),
+    linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
+}
+.aegis-matrix-rain {
+  position: absolute; inset: 0; z-index: 2; opacity: .55; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 22%, #000 62%);
+  mask-image: radial-gradient(ellipse at center, transparent 22%, #000 62%);
+}
+.aegis-boot-plate {
+  --art: min(30vmin, 210px); --ring: 1.64;
+  position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: .85rem; padding: 1.5rem;
+}
+.aegis-boot-art { position: relative; display: grid; place-items: center; width: calc(var(--art) * var(--ring)); height: calc(var(--art) * var(--ring)); }
+.aegis-boot-mark {
+  width: var(--art); height: var(--art); object-fit: contain;
+  filter: drop-shadow(0 0 34px color-mix(in oklab, var(--a-accent) 55%, transparent));
+  animation: aegis-mark-in 1.1s cubic-bezier(.16, 1, .3, 1) .2s both;
+}
+@keyframes aegis-mark-in { from { opacity: 0; transform: scale(.78); } to { opacity: 1; transform: scale(1); } }
+.aegis-boot-bar { width: var(--art); height: 2px; margin-top: .5rem; background: rgba(255, 255, 255, .08); overflow: hidden; }
+.aegis-boot-bar span { display: block; width: 0; height: 100%; background: var(--a-accent); box-shadow: 0 0 12px var(--a-accent); animation: aegis-boot-fill 5.4s cubic-bezier(.3, .8, .4, 1) forwards; }
+.aegis-boot.leaving .aegis-boot-bar span { width: 100%; animation: none; transition: width .3s ease; }
+@keyframes aegis-boot-fill { from { width: 0; } to { width: 92%; } }
+.aegis-boot-status { margin: 0; color: color-mix(in oklab, var(--a-accent) 70%, #fff); font-size: .6rem; letter-spacing: .24em; text-transform: uppercase; }
+
+.aegis-boot-constellation { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.aegis-boot-constellation .bc-spin { transform-origin: 240px 240px; animation: aegis-bc-spin 54s linear infinite; }
+@keyframes aegis-bc-spin { to { transform: rotate(360deg); } }
+.aegis-boot-constellation .bc-arc { fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: aegis-bc-draw 2.1s cubic-bezier(.65, 0, .35, 1) forwards; }
+.aegis-boot-constellation .bc-arc-2 { animation-delay: .28s; }
+.aegis-boot-constellation .bc-arc-3 { animation-delay: .54s; }
+@keyframes aegis-bc-draw { to { stroke-dashoffset: 0; } }
+.aegis-boot-constellation .bc-link {
+  stroke: color-mix(in oklab, var(--a-accent) 30%, transparent); stroke-width: .9;
+  stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: aegis-bc-link 0.9s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+@keyframes aegis-bc-link { to { stroke-dashoffset: 0; } }
+.aegis-boot-constellation .bc-star {
+  fill: var(--a-accent); opacity: 0; transform-box: fill-box; transform-origin: center;
+  filter: drop-shadow(0 0 6px var(--a-accent)); animation: aegis-bc-pop .72s cubic-bezier(.2, 1.35, .4, 1) forwards;
+}
+@keyframes aegis-bc-pop {
+  0% { opacity: 0; transform: scale(.3) rotate(-35deg); }
+  60% { opacity: 1; transform: scale(1.3) rotate(6deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.aegis-boot-constellation .bc-halo { opacity: 0; transform-box: fill-box; transform-origin: center; animation: aegis-bc-ignite 1.5s ease-out forwards; }
+@keyframes aegis-bc-ignite { 0% { opacity: 0; transform: scale(.4); } 40% { opacity: .85; transform: scale(1.15); } 100% { opacity: .3; transform: scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .aegis-hud-sweep, .aegis-boot-bg, .aegis-boot-mark, .aegis-boot-constellation * { animation: none !important; }
+  .aegis-boot-constellation .bc-arc, .aegis-boot-constellation .bc-link { stroke-dashoffset: 0; }
+  .aegis-boot-constellation .bc-star { opacity: 1; }
+  .aegis-boot { transition: none; }
+}
+.aegis-orb-note { position: absolute; left: 12px; bottom: 10px; font: 11px/1 var(--theme-font-mono, ui-monospace, monospace); letter-spacing: .12em; text-transform: uppercase; color: var(--a-muted); opacity: .7; }

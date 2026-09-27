@@ -1,0 +1,51 @@
+# AEGIS Regalia — AEGIS theme pack for the Hermes dashboard.
+# Drop into <Hermes home>/dashboard-themes/ and pick it in the theme switcher.
+name: aegis-regalia
+label: AEGIS Regalia
+description: Gold lettering on deep burgundy, with Great Vibes calligraphy.
+palette:
+  background:
+    hex: '#3a0f1a'
+    alpha: 1
+  midground:
+    hex: '#ecd9a0'
+    alpha: 1
+  foreground:
+    hex: '#ffffff'
+    alpha: 0
+  warmGlow: rgba(230, 195, 77, 0.3)
+  noiseOpacity: 0
+typography:
+  fontSans: '"IM Fell English", "Iowan Old Style", "Palatino Linotype", Georgia, serif'
+  fontMono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace
+  baseSize: 16px
+  lineHeight: '1.6'
+  letterSpacing: '0'
+  fontDisplay: '"Great Vibes", "Snell Roundhand", "Segoe Script", cursive'
+  fontUrl: /dashboard-plugins/aegis/dist/fonts/aegis-fonts.css
+layout:
+  radius: 0.75rem
+  density: comfortable
+colorOverrides:
+  card: '#4a1622'
+  cardForeground: '#ecd9a0'
+  popover: '#4a1622'
+  popoverForeground: '#ecd9a0'
+  primary: '#e6c34d'
+  primaryForeground: '#2a0a13'
+  secondary: '#5a1e2c'
+  secondaryForeground: '#ecd9a0'
+  muted: '#5a1e2c'
+  mutedForeground: '#c9a86f'
+  accent: '#5a1e2c'
+  accentForeground: '#ecd9a0'
+  destructive: '#e8a06a'
+  success: '#b8c07a'
+  border: '#6a2434'
+  input: '#6a2434'
+  ring: '#e6c34d'
+customCSS: "h1, h2 { font-family: var(--theme-font-display); font-weight: 400; letter-spacing: 0; line-height: 1.25;\
+  \ }\n      h1 { font-size: 2.6em; }\n      h2 { font-size: 1.9em; }\n      /* IM Fell sets old-style figures;\
+  \ readings and counts read better lining. */\n      .aegis-tile strong, .aegis-readout small, .aegis-mission-status,\
+  \ .aegis-feed-meta, .aegis-feed-row time,\n      .aegis-task-meta, .aegis-agent-meta {\n        font-family: \"\
+  Palatino Linotype\", \"Book Antiqua\", Palatino, serif;\n      }"

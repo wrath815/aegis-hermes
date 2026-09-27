@@ -1,0 +1,17 @@
+{
+  "name": "aegis",
+  "label": "Mission Control",
+  "description": "AEGIS Mission Control \u2014 live orb, agents, tasks, activity and host telemetry, plus the AEGIS boot plate and HUD.",
+  "icon": "Activity",
+  "version": "0.1.0",
+  "tab": {
+    "path": "/mission",
+    "position": "after:chat"
+  },
+  "slots": [
+    "overlay"
+  ],
+  "entry": "dist/index.js",
+  "css": "dist/style.css",
+  "api": "plugin_api.py"
+}
